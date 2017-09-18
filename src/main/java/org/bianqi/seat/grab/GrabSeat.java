@@ -20,10 +20,10 @@ public class GrabSeat {
 		// 二到四数字代表:401为教室
 		// 五到七数字代表:229为座位的位置
 		// 比如:1401229代表 东区401自习室229座位
-		taskGrab("http://172.16.47.84/Skip.aspx", "http://172.16.47.84/", "", "", "1401229");
+		taskGrab("http://172.16.47.84/Skip.aspx", "http://172.16.47.84/", "2014023026", "901695", "2201117");
 	}
 
-	public static void taskGrab(String appUrl, String cookieUrl, String username, String password, String seatId) {
+	public static void taskGrab(final String appUrl, final String cookieUrl, final String username, final String password, final String seatId) {
 		Calendar calendar = Calendar.getInstance();
 		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH);

@@ -69,8 +69,9 @@ class MainFrame extends JFrame{
 		this.setVisible(true);
 		this.setAlwaysOnTop(true);
 		this.setLocation(400, 200);
-		this.setSize(500, 300);
+		this.setSize(506, 329);
 		this.setTitle(title);
+		this.setResizable(false);
 		mb =new JMenuBar();//创建菜单栏
 		m = new JMenu("开始");//创建“文件”菜单    
 		m1 = new JMenu("关于");
@@ -90,7 +91,7 @@ class MainFrame extends JFrame{
 		aboutItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "      开发者软件141回眸,境界", "关于", JOptionPane.INFORMATION_MESSAGE); 
+				JOptionPane.showMessageDialog(frame, "      开发者软件141BQ", "关于", JOptionPane.INFORMATION_MESSAGE); 
 			}
 		});
 		
@@ -112,7 +113,7 @@ class MainFrame extends JFrame{
         pasw.setEchoChar('*'); 
         lbl3 = new JLabel("座    位:"); 
         lbl3.setBounds(15,90, 80, 30);
-        img = new ImageIcon("images/timg.jpg");  
+        img = new ImageIcon(MainGUI.class.getClassLoader().getResource("timg.jpg"));  
         //TODO 需要显示座位
         bll3 = new JLabel("座位号");  
         
@@ -120,7 +121,7 @@ class MainFrame extends JFrame{
         		"中区201", "中区206", "中区211", "西区207",
         		"西区401"};  
         
-        String str2[] = {"巨坑", "菜鸟", "一般", "大神",
+        String str2[] = {"001", "菜鸟", "一般", "大神",
         		"巨坑", "菜鸟", "一般", "大神",
         		"巨坑", "菜鸟", "一般", "大神",
         		"巨坑", "菜鸟", "一般", "大神",
@@ -206,7 +207,6 @@ class MainFrame extends JFrame{
         contain.add(jcb1);
         contain.add(jcb2);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-//        this.setResizable(false);  
         this.setVisible(true);  
 	}
 	

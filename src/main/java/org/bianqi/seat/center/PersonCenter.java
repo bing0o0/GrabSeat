@@ -11,7 +11,7 @@ import org.jsoup.Connection.Response;
 public class PersonCenter {
 	
 	public static void main(String[] args) throws Exception {
-		enterCenter("http://172.16.47.84/InfoSearch.aspx","http://172.16.47.84/", "", "");
+		enterCenter("http://172.16.47.84/InfoSearch.aspx","http://172.16.47.84/", "2014023002", "123456");
 	}
 	
 	public static String enterCenter(String appUrl,String cookieUrl, String username, String password) throws Exception {

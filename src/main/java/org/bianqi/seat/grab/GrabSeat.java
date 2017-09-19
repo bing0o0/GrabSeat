@@ -13,6 +13,9 @@ import org.bianqi.seat.room.AppRoom;
  *
  */
 public class GrabSeat {
+	
+	static String response = "";
+
 	public static void main(String[] args) {
 		// 第一个参数不修改 第二个参数不修改，第三个参数为用户名，第四个参数为密码，第五个参数为座位
 		// 【第四个参数每个数字代表的含义】
@@ -20,10 +23,9 @@ public class GrabSeat {
 		// 二到四数字代表:401为教室
 		// 五到七数字代表:229为座位的位置
 		// 比如:1401229代表 东区401自习室229座位
-		taskGrab("http://172.16.47.84/Skip.aspx", "http://172.16.47.84/", "2014023026", "901695", "2201117");
+		taskGrab("http://172.16.47.84/Skip.aspx", "http://172.16.47.84/", "2014023002", "123456", "2211117");
 	}
-
-	public static void taskGrab(final String appUrl, final String cookieUrl, final String username, final String password, final String seatId) {
+	public static String taskGrab(final String appUrl, final String cookieUrl, final String username, final String password, final String seatId) {
 		Calendar calendar = Calendar.getInstance();
 		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH);
@@ -31,18 +33,22 @@ public class GrabSeat {
 		// 定制每天的13:00:00执行
 		calendar.set(year, month, day, 13, 00, 00);
 		Date date = calendar.getTime();
-		Timer timer = new Timer();
+		final Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				try {
-					AppRoom.getSeat(appUrl, cookieUrl, username, password, seatId);
+					response = AppRoom.getSeat(appUrl, cookieUrl, username, password, seatId);
+					if(response.equals("明日预约成功")){
+						timer.cancel();
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		};
 		timer.schedule(task, date, 1);
+		return response;
 	}
 
 }

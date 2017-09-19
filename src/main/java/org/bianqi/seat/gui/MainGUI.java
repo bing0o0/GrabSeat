@@ -6,9 +6,11 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -44,8 +46,6 @@ public class MainGUI {
 	}
 }
 
-
-
 class MainFrame extends JFrame{
 
 	private static final long serialVersionUID = -5115488791553705781L;
@@ -59,9 +59,11 @@ class MainFrame extends JFrame{
 	JMenu m1 = null;
 	JMenuItem closeItem = null;
 	JMenuItem aboutItem = null;
+	JMenuItem useItem = null;
 	JLabel lbl1 = null;
 	JLabel lbl2 = null;
 	JLabel lbl3 = null;
+	JLabel lbl4 = null;
 	JLabel bll3 = null;
 	JTextField txt = null;
 	JPasswordField pasw = null;
@@ -78,6 +80,10 @@ class MainFrame extends JFrame{
 	}
 	
 	public void init(String title){
+		Toolkit t = Toolkit.getDefaultToolkit();
+		Image i = t.getImage(MainGUI.class.getClassLoader().getResource("title.png"));
+//		Image i = t.getImage("title.png");
+		this.setIconImage(i);
 		this.setVisible(true);
 		this.setAlwaysOnTop(true);
 		this.setLocation(400, 200);
@@ -107,7 +113,17 @@ class MainFrame extends JFrame{
 			}
 		});
 		
+		useItem = new JMenuItem("使用说明");
+		useItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frame, "1401代表东区401,2101代表中区101,1开头为东区,2开头为中区,3开头为西区,每天0:00~~13:00可以使用这个软件,其他时间不可以使用", "使用说明", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		
         m.add(closeItem);//将“退出”菜单项添加到“文件”菜单上
+        m1.add(useItem);
         m1.add(aboutItem);
         mb.add(m);//将文件添加到菜单栏上
         mb.add(m1);
@@ -123,17 +139,17 @@ class MainFrame extends JFrame{
         pasw = new JPasswordField(10);
         pasw.setBounds(60, 50, 150, 25);
         pasw.setEchoChar('*'); 
-        lbl3 = new JLabel("座    位:"); 
-        lbl3.setBounds(15,90, 80, 30);
-//        img = new ImageIcon(MainGUI.class.getClassLoader().getResource("timg.jpg"));  
-        img = new ImageIcon("timg.jpg");  
+        lbl3 = new JLabel("教   室:"); 
+        lbl3.setBounds(10,90, 80, 30);
+        lbl4 = new JLabel("座   位:"); 
+        lbl4.setBounds(280,90, 80, 30);
+        img = new ImageIcon(MainGUI.class.getClassLoader().getResource("timg.jpg"));  
+//        img = new ImageIcon("timg.jpg");  
         //TODO 需要显示座位
         bll3 = new JLabel("座位号");  
-        
         String str1[] = {"1401", "2101",
         		"2201", "2206", "2211", "3207",
         		"3401"};  
-        
         final String str1401[] = {"001", "002", "003", "004",
         		            "005", "006", "007", "008",
         		            "009", "010", "011", "012",
@@ -698,7 +714,7 @@ class MainFrame extends JFrame{
 				seatNum = selectedItem1+selectedItem2;
 			}
 		});
-        jcb2.setBounds(250,90,130,25);
+        jcb2.setBounds(330,90,130,25);
 
         imgLabel = new JLabel(img);  
         btn1 = new JButton("定时抢座");
@@ -763,6 +779,7 @@ class MainFrame extends JFrame{
         contain.add(lbl2);  
         contain.add(pasw);
         contain.add(lbl3);
+        contain.add(lbl4);
         contain.add(btn1);
         contain.add(jcb1);
         contain.add(jcb2);
